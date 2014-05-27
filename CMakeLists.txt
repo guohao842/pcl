@@ -234,7 +234,9 @@ else(OPENMP_FOUND)
 endif()
 
 # Boost (required)
-find_package(Boost)
+# find_package(Boost HINTS "C:/local")
+SET(Boost_DIR "C:/local/boost_1_55_0" CACHE PATH "Boost directory override" FORCE)
+SET(Boost_INCLUDE_DIR "C:/local/boost_1_55_0" CACHE PATH "Boost include directory override" FORCE)
 SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${Boost_INCLUDE_DIR})
 
 MESSAGE(STATUS "CMAKE_GENERATOR  = " ${CMAKE_GENERATOR})
