@@ -373,8 +373,8 @@ endif(WITH_QT)
 # Find VTK
 option(WITH_VTK "Build VTK-Visualizations" TRUE)
 if(WITH_VTK AND NOT ANDROID)
-  find_package(VTK)
   SET(VTK_DIR "$ENV{USERPROFILE}/Documents/Builds/vtk-5.8-vc11-64" CACHE STRING "VTK directory")
+  find_package(VTK)
   if(VTK_FOUND)
     if (PCL_SHARED_LIBS OR
         (NOT (PCL_SHARED_LIBS) AND NOT (VTK_BUILD_SHARED_LIBS)))
