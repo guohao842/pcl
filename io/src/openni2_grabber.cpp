@@ -601,10 +601,10 @@ pcl::io::OpenNI2Grabber::convertToXYZRGBPointCloud (const Image::Ptr &image, con
   cloud->points.resize (cloud->height * cloud->width);
 
   // Generate default camera parameters
-  float fx = device_->getColorFocalLength (); // Horizontal focal length
-  float fy = device_->getColorFocalLength (); // Vertcal focal length
-  float cx = ((float)cloud->width - 1.f) / 2.f;  // Center x
-  float cy = ((float)cloud->height - 1.f) / 2.f; // Center y
+  float fx = device_->getDepthFocalLength (); // Horizontal focal length
+  float fy = device_->getDepthFocalLength (); // Vertcal focal length
+  float cx = ((float)depth_width_ - 1.f) / 2.f;  // Center x
+  float cy = ((float)depth_height_- 1.f) / 2.f; // Center y
 
   // Load pre-calibrated camera parameters if they exist
   if (pcl_isfinite (depth_parameters_.focal_length_x))
@@ -726,8 +726,8 @@ pcl::io::OpenNI2Grabber::convertToXYZIPointCloud (const IRImage::Ptr &ir_image, 
   cloud->points.resize (cloud->height * cloud->width);
 
 
-  float fx = device_->getColorFocalLength (); // Horizontal focal length
-  float fy = device_->getColorFocalLength (); // Vertcal focal length
+  float fx = device_->getDepthFocalLength (); // Horizontal focal length
+  float fy = device_->getDepthFocalLength (); // Vertcal focal length
   float cx = ((float)cloud->width - 1.f) / 2.f;  // Center x
   float cy = ((float)cloud->height - 1.f) / 2.f; // Center y
 
@@ -907,8 +907,8 @@ void pcl::io::OpenNI2Grabber::processDepthFrame (openni::VideoStream& stream)
   float focalLength = device_->getDepthFocalLength ();
 
   float baseline = device_->getBaseline();
-  uint64_t no_sample_value = device_->getShadowValue();
-  uint64_t shadow_value = no_sample_value;
+  pcl::uint64_t no_sample_value = device_->getShadowValue();
+  pcl::uint64_t shadow_value = no_sample_value;
   
   boost::shared_ptr<DepthImage> image  = 
    boost::make_shared<DepthImage> (frameWrapper, baseline, focalLength, shadow_value, no_sample_value);
